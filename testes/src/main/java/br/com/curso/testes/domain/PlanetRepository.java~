@@ -1,4 +1,4 @@
-package br.com.curso.testes.domain;
+package com.example.swplanetapi.domain;
 
 import java.util.List;
 import java.util.Optional;

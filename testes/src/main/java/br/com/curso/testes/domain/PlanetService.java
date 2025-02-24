@@ -1,36 +1,37 @@
 package br.com.curso.testes.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
+
 @Service
 public class PlanetService {
+  private PlanetRepository planetRepository;
 
-    @Autowired
-    private PlanetRepository repository;
+  public PlanetService(PlanetRepository planetRepository) {
+    this.planetRepository = planetRepository;
+  }
 
-    public Planet create(Planet planet) {
-        return repository.save(planet);
-    }
+  public Planet create(Planet planet) {
+    return planetRepository.save(planet);
+  }
 
-    public Optional<Planet> findById(Long id) {
-        return repository.findById(id);
-    }
+  public Optional<Planet> get(Long id) {
+    return planetRepository.findById(id);
+  }
 
-    public Optional<Planet> findByName(String name) {
-        return repository.findByName(name);
-    }
+  public Optional<Planet> getByName(String name) {
+    return planetRepository.findByName(name);
+  }
 
-    public List<Planet> list(String terrain, String climate) {
-        Example<Planet> query = QueryBuilder.makeQuery(new Planet(climate,terrain));
-        return repository.findAll(query);
-    }
+  public List<Planet> list(String terrain, String climate) {
+    Example<Planet> query = QueryBuilder.makeQuery(new Planet(climate, terrain));
+    return planetRepository.findAll(query);
+  }
 
-    public void remove(Long id) {
-        repository.deleteById(id);
-    }
+  public void remove(Long id) {
+    planetRepository.deleteById(id);
+  }
 }
